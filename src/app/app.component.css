@@ -1,0 +1,14 @@
+
+.userList:nth-child(odd){
+  background-color: whiteSmoke;
+}
+.userList {
+  padding:10px 0px 0px 10px;
+}
+#bigList{
+  height:100vh;
+  overflow-y: scroll;
+}
+.modal-content{
+  top:150px !important;
+}
