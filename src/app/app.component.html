@@ -16,17 +16,17 @@
     <div class="col-md-7">
       <app-details [currentU]='currentUser'></app-details>
     </div>
-    <div class="modal fade" tabindex="-1" role="dialog" [ngStyle]="{'display': visible ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+    <div class="modal fade" tabindex="-1" role="dialog" [ngStyle]="{'display': modalVisible ? 'block' : 'none', 'opacity': modalVisibleAnimate ? 1 : 0}">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="hide()"><span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title">Login</h4>
           </div>
           <div class="modal-body">
             <p>Merci de vous identifier (demo:123)</p>
             <div class="alert alert-warning" [ngStyle]="{'display':advertising ? 'block':'none'}">
-              <strong>Désolé, </strong> Mauvais mot de passe ou login...
+              <strong>Désolé, </strong> mauvais mot de passe ou login...
             </div>
             <form #itemForm="ngForm">
               <input [(ngModel)]="login" name="identifiant" placeholder="login"/>
@@ -35,7 +35,7 @@
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary" (click)="hide()">Connection</button>
+            <button type="button" class="btn btn-primary" (click)="hideModal()">Connection</button>
           </div>
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->

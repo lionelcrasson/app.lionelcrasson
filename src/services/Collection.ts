@@ -1,5 +1,6 @@
 import {Http} from '@angular/http';
 import {User} from '../models/User';
+import {Access} from '../models/Access';
 import {Injectable} from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
@@ -11,6 +12,7 @@ export class Collection{
 
 public collection:User[];
 public currentU:User;
+public access:Access;
 private Http: Http;
 
   constructor(Http:Http){
@@ -31,6 +33,14 @@ private Http: Http;
                       this.currentU = response.json();
                       console.log(this.currentU);
                       return this.currentU;
+                    })
+  }
+  getAccess(login,pass):Observable<Access>{
+    return this.Http.get('http://www.api.lionelcrasson.be/access/')
+                    .map(response=>{
+                      this.access = response.json();
+                      console.log(this.access);
+                      return this.access;
                     })
   }
 

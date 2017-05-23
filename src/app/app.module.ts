@@ -4,9 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
 import {Collection} from '../services/Collection';
 import {Http} from '@angular/http';
-
-
-
+import { CookieService } from '../../node_modules/angular2-cookie/services/cookies.service';
 
 import { AppComponent } from './app.component';
 import { detailsComponent } from './details.component';
@@ -22,7 +20,7 @@ import { MenuComponent } from './menu.component';
     FormsModule,
     HttpModule
   ],
-  providers: [Collection],
+  providers: [Collection, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
