@@ -4,17 +4,19 @@
 <div class="container">
 
   <div class="row">
-
-    <div class="col-md-1">
+    <div class="col-xs-2 col-md-2 ">
       <app-menu></app-menu>
     </div>
-    <div class="col-md-3" id="bigList">
+    <div class="col-xs-3 col-md-3 " id="bigList">
         <div id="test" class="row userList"  *ngFor="let item of collection">
           <p><a href="#" (click)="getDetails($event)" id="{{item.idUsers}}">{{item.Prenom}} {{item.Nom}}</a></p>
         </div>
     </div>
-    <div class="col-md-7">
-      <app-details [currentU]='currentUser'></app-details>
+    <div class="col-xs-7 col-md-7 ">
+
+        <app-details [(currentU)]='currentUser' (updatedUser)="isUpDate($event)"></app-details>
+
+      </div>
     </div>
     <div class="modal fade" tabindex="-1" role="dialog" [ngStyle]="{'display': modalVisible ? 'block' : 'none', 'opacity': modalVisibleAnimate ? 1 : 0}">
       <div class="modal-dialog" role="document">
@@ -30,7 +32,7 @@
             </div>
             <form #itemForm="ngForm">
               <input [(ngModel)]="login" name="identifiant" placeholder="login"/>
-              <input [(ngModel)]="pass" name="pass" placeholder="pass"/>
+              <input [(ngModel)]="pass" name="pass" placeholder="pass" type="password"/>
 
             </form>
           </div>
@@ -41,5 +43,3 @@
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
   </div>
-
-</div>

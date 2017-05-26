@@ -12,3 +12,10 @@
 .modal-content{
   top:150px !important;
 }
+@media screen and (max-width: 767px) {
+  #bigList{
+    height: 30vh;
+    margin-bottom: 20px;
+    border: solid 1px whitesmoke;
+  }
+}

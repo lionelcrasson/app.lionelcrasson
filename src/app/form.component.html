@@ -1,0 +1,21 @@
+
+<form class="form-horizontal">
+    <div class="form-group">
+      <label class="col-md-2 control-label">Titre</label>
+      <div class="col-md-10">
+        <input [(ngModel)]='UserForm.titre' name='titre' type="text" class="form-control" placeholder="{{UserForm.titre}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-md-2 control-label">Prénom</label>
+      <div class="col-md-10">
+        <input [(ngModel)]='UserForm.Prenom' type="text" class="form-control" name='prenom' placeholder="{{UserForm.Prenom}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-md-2 control-label">Nom</label>
+      <div class="col-md-10">
+        <input [(ngModel)]='UserForm.Nom' name='nom' type="text" class="form-control" placeholder="{{UserForm.Nom}}">
+      </div>
+    </div>
+  </form>

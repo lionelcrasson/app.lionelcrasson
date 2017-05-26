@@ -1,8 +1,10 @@
-import {Component,Output, EventEmitter} from '@angular/core';
+import {Component,Output,Input, EventEmitter,OnInit} from '@angular/core';
 import {Collection} from '../services/Collection';
 import {User} from '../models/User';
 import {Access} from '../models/Access';
 import {detailsComponent} from './details.component';
+import {MenuComponent} from './menu.component';
+//obsolete => https://github.com/salemdar/ngx-cookie#get-started
 import { CookieService } from 'ng2-cookies';
 import * as CryptoJS from 'crypto-js';
 
@@ -11,37 +13,52 @@ import * as CryptoJS from 'crypto-js';
   providers: [ CookieService ],
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.css'],
-
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   private secretKey:string = "FAD24C6C42F68F37AB584D29C57A6";
   private encryptPass:string;
   private Coll:Collection;
-  private collection: User[];
-  private currentUser:User = new User({}); // Important !
+  public collection: User[]=[];
+  @Input() currentUser:User = new User({}); // Important !
   private tokenAuth:Access = new Access({});
   private modalVisible:boolean = false;
   private modalVisibleAnimate:boolean = false;
-  private advertising = false;
+  private advertisingLogin = false;
   private login:string;
   private pass:string;
   private title = 'Welcome';
   private hasCookieToken:boolean=false;
-
+  public request:string='v';
+  public testValue:number = 20;
   constructor(Collection: Collection, public cookieService: CookieService){
     this.Coll = Collection;
-    if(this.hasCookieToken)
-      this.loadCollection();
-    else
-      this.showModal();
   }
+   ngOnInit(){
+     if(this.hasCookieToken)
+       this.loadCollection();
+     else
+       this.showModal();
+   }
+   isUpDate(U:User){
+        var objFound_bool = false;
+        for (var i = 0; i < this.collection.length && objFound_bool == false; i++) {
+          if(U.idUsers === this.collection[i].idUsers){
+            objFound_bool = true;
+            console.log("mise à jour");
+            this.collection[i] = U ;
+          }
+        }
+   }
+
   addCookie(cName: string, cValue: string) {
     console.log('Adding: ', cName, cValue);
     this.cookieService.set(cName, cValue);
   }
+
   loadCollection():void{
     this.Coll.getUsers().subscribe(collection=>{
-      this.collection = collection;
+      this.collection =collection;
+      console.log("call collection");
     });
   }
   public showModal(): void {
@@ -59,22 +76,33 @@ export class AppComponent {
           setTimeout(() => this.modalVisible = false, 300);
           this.loadCollection();
         }else{
-          this.advertising = true;
+          this.advertisingLogin = true;
       }
 
     });
     */
+
     if(this.login == 'demo' && this.pass=='123'){
+
       this.modalVisibleAnimate = false;
       setTimeout(() => this.modalVisible = false, 300);
       this.loadCollection()
     }else{
-      this.advertising = true;
+      this.advertisingLogin = true;
     }
   }
   getDetails(event : Event):void{
     event.preventDefault();
     let element = (<HTMLTextAreaElement>event.target);
+    // VERSION LOCALE
+    var objFound_bool = false;
+    for (var i = 0; i < this.collection.length && objFound_bool == false; i++) {
+      if(element.id === this.collection[i].idUsers.toString()){
+        objFound_bool = true;
+        this.currentUser = this.collection[i] ;
+      }
+    }
+/* VERSION LIVE
     this.Coll.getOneUser(element.id).subscribe(currentUser=>{
       this.currentUser = new User({
         "Titre":currentUser[0].Titre,
@@ -87,5 +115,6 @@ export class AppComponent {
         "code_postal":currentUser[0].code_postal
       });
     });
+    */
   }
 }

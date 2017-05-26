@@ -1,7 +1,16 @@
-
-<h3>{{currentU.Titre}}{{currentU.prenom}} {{currentU.nom}}</h3>
-<p>
-  {{currentU.rue_l1}}<br />
-  {{currentU.cp}} {{currentU.ville}}<br />
-  {{currentU.pays}}<br />
-</p>
+<div class="container">
+<button (click)="switchView()" *ngIf="currentU.idUsers" class="btn">Modifier</button>
+<button (click)="saveView()" *ngIf="currentU.idUsers" class="btn">Enregistrer</button>
+<div [ngSwitch]='dynamicLoader'>
+  <div *ngSwitchCase="1">
+      <h3>{{currentU.Titre}} {{currentU.Prenom}} {{currentU.Nom}}</h3>
+      <p>
+        {{currentU.Rue_num1}}<br />
+        {{currentU.code_postal}} {{currentU.Nom_ville}}<br />
+        {{currentU.Pays}}<br />
+      </p>
+  </div>
+  <div *ngSwitchCase="2">
+    <app-form [(UserForm)]='currentU'></app-form>
+  </div>
+</div>

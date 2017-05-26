@@ -1,22 +1,22 @@
 export class User{
 
-  public nom:string;
-  public prenom:string;
-  public ville:string;
-  public cp:string;
-  public titre:string;
-  public id:number;
-  public rue_l1:string;
-  public pays:string;
+  public Nom:string;
+  public Prenom:string;
+  public Nom_ville:string;
+  public code_postal:string;
+  public Titre:string;
+  public idUsers:number;
+  public Rue_num1:string;
+  public Pays:string;
 
   constructor(data:any){
-    this.nom = data.Nom;
-    this.prenom = data.Prenom;
-    this.ville = data.Nom_ville;
-    this.cp = data.code_postal;
-    this.titre = data.Titre;
-    this.id = data.idUsers;
-    this.rue_l1 = data.Rue_num1;
-    this.pays = data.Pays;
+    this.Nom = data.Nom;
+    this.Prenom = data.Prenom;
+    this.Nom_ville = data.Nom_ville;
+    this.code_postal = data.code_postal;
+    this.Titre = data.Titre;
+    this.idUsers = data.idUsers;
+    this.Rue_num1 = data.Rue_num1;
+    this.Pays = data.Pays;
   }
 }
