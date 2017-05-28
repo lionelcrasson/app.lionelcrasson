@@ -7,7 +7,7 @@ import {MenuComponent} from './menu.component';
 //obsolete => https://github.com/salemdar/ngx-cookie#get-started
 import { CookieService } from 'ng2-cookies';
 import * as CryptoJS from 'crypto-js';
-
+import {liveSearchPipe} from '../pipes/liveSearch';
 @Component({
   selector: 'app-root',
   providers: [ CookieService ],
@@ -30,12 +30,16 @@ export class AppComponent implements OnInit{
   private hasCookieToken:boolean=false;
   public request:string='v';
   public testValue:number = 20;
+  public search:string="";
+  public displayContent="0";
+
   constructor(Collection: Collection, public cookieService: CookieService){
     this.Coll = Collection;
   }
    ngOnInit(){
      if(this.hasCookieToken)
        this.loadCollection();
+
      else
        this.showModal();
    }
@@ -44,10 +48,12 @@ export class AppComponent implements OnInit{
         for (var i = 0; i < this.collection.length && objFound_bool == false; i++) {
           if(U.idUsers === this.collection[i].idUsers){
             objFound_bool = true;
-            console.log("mise à jour");
             this.collection[i] = U ;
           }
         }
+        this.Coll.UpdateUser(U).subscribe(
+          data => console.log(data)
+        );
    }
 
   addCookie(cName: string, cValue: string) {
@@ -58,8 +64,8 @@ export class AppComponent implements OnInit{
   loadCollection():void{
     this.Coll.getUsers().subscribe(collection=>{
       this.collection =collection;
-      console.log("call collection");
     });
+    this.displayContent="1";
   }
   public showModal(): void {
     this.modalVisible = true;

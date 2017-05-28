@@ -41,12 +41,11 @@ private headers = new Headers({'Content-Type': 'application/json'});
   }
 
     UpdateUser(U:User):Observable<User>{
-      var body = JSON.stringify(U);
+      var body = U;
       return this.Http.put('http://www.api.lionelcrasson.be/user/'+U.idUsers,body,{
         headers:this.headers
       }).map(response=>{
-              this.currentU = response.json();
-              console.log(this.currentU);
+              console.log(response);
               return this.currentU;
       })
   }

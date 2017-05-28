@@ -1,14 +1,17 @@
 <h1>
   {{title}}
 </h1>
-<div class="container">
+<div class="container" [ngSwitch]='displayContent'>
 
-  <div class="row">
-    <div class="col-xs-2 col-md-2 ">
+  <div class="row" *ngSwitchCase="1">
+
+
+    <div class="col-xs-2 col-md-2 " >
       <app-menu></app-menu>
     </div>
     <div class="col-xs-3 col-md-3 " id="bigList">
-        <div id="test" class="row userList"  *ngFor="let item of collection">
+        <input type="text" placeholder="Chercher par nom ou prénom" name="searching" [(ngModel)]="search" />
+        <div id="test" class="row userList"  *ngFor="let item of collection | liveSearch:search">
           <p><a href="#" (click)="getDetails($event)" id="{{item.idUsers}}">{{item.Prenom}} {{item.Nom}}</a></p>
         </div>
     </div>
@@ -28,7 +31,7 @@
           <div class="modal-body">
             <p>Merci de vous identifier (demo:123)</p>
             <div class="alert alert-warning" [ngStyle]="{'display':advertising ? 'block':'none'}">
-              <strong>Désolé, </strong> mauvais mot de passe ou login...
+              <strong>Désolé, </strong> Mauvais mot de passe ou login...
             </div>
             <form #itemForm="ngForm">
               <input [(ngModel)]="login" name="identifiant" placeholder="login"/>

@@ -1,13 +1,20 @@
 
-.userList:nth-child(odd){
-  background-color: whiteSmoke;
+.userList{
+
+margin-left: 15px;
+border-bottom: 1px solid #e7e7e7;
+box-shadow: 0px 1px 0px #ffffff;
 }
 .userList {
-  padding:10px 0px 0px 10px;
+  padding:10px 0px 0px 0px;
+}
+.userlist p{
+  color:grey !important;
 }
 #bigList{
   height:100vh;
   overflow-y: scroll;
+  background-color: whiteSmoke;
 }
 .modal-content{
   top:150px !important;

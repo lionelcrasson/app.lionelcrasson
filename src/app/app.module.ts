@@ -10,7 +10,8 @@ import { AppComponent } from './app.component';
 import { FormComponent } from './form.component';
 import { detailsComponent } from './details.component';
 import { MenuComponent } from './menu.component';
-import { liveSearchPipe} from './pipe.liveSearchPipe'
+import {liveSearchPipe} from '../pipes/liveSearch';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +25,7 @@ import { liveSearchPipe} from './pipe.liveSearchPipe'
     FormsModule,
     HttpModule
   ],
-  providers: [Collection, CookieService, liveSearchPipe],
+  providers: [Collection, CookieService,liveSearchPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
