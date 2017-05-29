@@ -4,13 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
 import {Collection} from '../services/Collection';
 import {Http} from '@angular/http';
-import { CookieService } from '../../node_modules/angular2-cookie/services/cookies.service';
+//import { CookieService } from '../../node_modules/angular2-cookie/services/cookies.service';
 
 import { AppComponent } from './app.component';
 import { FormComponent } from './form.component';
 import { detailsComponent } from './details.component';
 import { MenuComponent } from './menu.component';
 import {liveSearchPipe} from '../pipes/liveSearch';
+import {Socket} from '../services/Socket'
 
 @NgModule({
   declarations: [
@@ -18,14 +19,14 @@ import {liveSearchPipe} from '../pipes/liveSearch';
     detailsComponent,
     MenuComponent,
     FormComponent,
-    liveSearchPipe
+    liveSearchPipe,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule
   ],
-  providers: [Collection, CookieService,liveSearchPipe],
+  providers: [Collection,liveSearchPipe,Socket],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

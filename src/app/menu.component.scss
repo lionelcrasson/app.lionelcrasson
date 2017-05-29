@@ -1,0 +1,24 @@
+$primary-color: #ea4c89;
+
+.isVisible{
+  display:block;
+}
+ul.isNotVisible{
+  display:none;
+}
+.menuContainer ul{
+  list-style: none;
+}
+.level2{
+  padding-left: 0px;
+}
+.titleApp{
+  color:$primary-color;
+}
+.level1 li{
+  padding-top:20px;
+}
+
+.level1 ul li{
+  padding-top:20px;
+}

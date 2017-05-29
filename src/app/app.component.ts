@@ -8,11 +8,12 @@ import {MenuComponent} from './menu.component';
 import { CookieService } from 'ng2-cookies';
 import * as CryptoJS from 'crypto-js';
 import {liveSearchPipe} from '../pipes/liveSearch';
+import {Socket} from '../services/Socket'
+
 @Component({
   selector: 'app-root',
-  providers: [ CookieService ],
   templateUrl: 'app.component.html',
-  styleUrls: ['app.component.css'],
+  styleUrls: ['app.component.scss'],
 })
 export class AppComponent implements OnInit{
   private secretKey:string = "FAD24C6C42F68F37AB584D29C57A6";
@@ -32,16 +33,24 @@ export class AppComponent implements OnInit{
   public testValue:number = 20;
   public search:string="";
   public displayContent="0";
+  private sock:any;
 
-  constructor(Collection: Collection, public cookieService: CookieService){
+  constructor(Collection: Collection,Socket:Socket){
     this.Coll = Collection;
+    this.sock = Socket.socket();
+  /*  this.sock.on('connection',function(message:string){
+      console.log("test");
+      console.log(message);
+    });
+    this.sock.emit("hello");*/
   }
    ngOnInit(){
-     if(this.hasCookieToken)
+     if(this.hasCookieToken){
        this.loadCollection();
+    }else{
+      this.showModal();
+    }
 
-     else
-       this.showModal();
    }
    isUpDate(U:User){
         var objFound_bool = false;
@@ -56,10 +65,10 @@ export class AppComponent implements OnInit{
         );
    }
 
-  addCookie(cName: string, cValue: string) {
+  /*addCookie(cName: string, cValue: string) {
     console.log('Adding: ', cName, cValue);
     this.cookieService.set(cName, cValue);
-  }
+  }*/
 
   loadCollection():void{
     this.Coll.getUsers().subscribe(collection=>{
